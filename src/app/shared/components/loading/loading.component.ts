@@ -49,7 +49,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 export class LoadingComponent implements AfterViewInit, OnChanges {
 
-  @Input() loading = false;
+  @Input() loading: boolean | null;
 
   @Input() immediateShow = false;
 

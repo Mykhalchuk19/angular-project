@@ -11,11 +11,13 @@
       </h2>
     </div>
 
-    <form class="login-form flex-center padding">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form flex-center padding">
 
       <mat-form-field class="no-padding-horizontal">
+        <div class="flex">
         <input matInput type="email" placeholder="Email"
                formControlName="email">
+        </div>
       </mat-form-field>
 
       <mat-form-field class="no-padding-horizontal">
@@ -44,4 +46,4 @@
   </app-content-layout>
 
 </div>
-<app-loading [isGlobal]="true"></app-loading>
+<app-loading [loading]="loading$ | async" [isGlobal]="true"></app-loading>

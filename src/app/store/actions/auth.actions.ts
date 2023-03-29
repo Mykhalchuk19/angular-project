@@ -5,3 +5,9 @@ export class Login {
 
   constructor(public payload:LoginFormValues) { }
 }
+
+export class SetAuthLoading {
+  static readonly type = '[Auth] SetAuthLoading';
+
+  constructor(public loading: boolean) { }
+}

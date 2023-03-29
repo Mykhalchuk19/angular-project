@@ -1,10 +1,9 @@
 import { Action, Actions, Selector, State, StateContext, Store } from '@ngxs/store';
 import {
-  Login,
+  Login, SetAuthLoading,
   // SetAuthLoading,
 } from '../actions/auth.actions';
 import { tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgZone, Injectable } from '@angular/core';
 // import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +15,7 @@ export class AuthStateModel {
 
   user?: string;
 
-  loading?: boolean;
+  loading: boolean;
 }
 
 @State<AuthStateModel>( {
@@ -38,7 +37,6 @@ export class AuthState {
 
   constructor(
     private userService: UserService,
-    private router: Router,
     private snackBar: MatSnackBar,
     private zone: NgZone,
     private store: Store,
@@ -141,8 +139,8 @@ export class AuthState {
   //   );
   // }
 
-  // @Action( SetAuthLoading )
-  // setAuthLoading( { patchState }: StateContext<AuthStateModel>, { loading }) {
-  //   patchState({ loading });
-  // }
+  @Action( SetAuthLoading )
+  setAuthLoading( { patchState }: StateContext<AuthStateModel>, { loading }: { loading: boolean }) {
+    patchState({ loading });
+  }
 }
