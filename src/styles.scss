@@ -1205,6 +1205,7 @@ i.material-icons:not(.icon-small) {
   background-color: var(--white);
   border-bottom: 1px solid var(--grey-10);
   z-index: 10;
+  min-height: 40px;
 }
 
 .header-title {

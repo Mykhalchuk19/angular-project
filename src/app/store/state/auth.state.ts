@@ -8,7 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgZone, Injectable } from '@angular/core';
 // import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../services/user.service';
-import { LoginFormValues } from '../../shared/types';
+import { LoginFormValues, LoginResponse } from '../../shared/types';
+import { Storage } from '../../shared/helpers';
 
 export class AuthStateModel {
   token?: string;
@@ -46,14 +47,14 @@ export class AuthState {
 
   @Action( Login )
   login( { patchState }: StateContext<AuthStateModel>, { payload }: { payload: LoginFormValues } ) {
-    console.log(patchState);
     return this.userService.login(payload).pipe(
-      tap((data) => {
-        console.log(data);
-        // patchState({ token, user, refreshToken });
-        // localStorage.setItem(REFRESH_TOKEN_STORAGE_KEY, JSON.stringify(refreshToken));
+      tap((data: LoginResponse) => {
+        patchState({ token: data.accessToken });
+        Storage.setTokenToStorage(data.accessToken);
       }, error => {
-        console.log( error );
+        this.snackBar.open(error.error.message, '', {
+          duration: 3000,
+        });
       }),
     );
   }

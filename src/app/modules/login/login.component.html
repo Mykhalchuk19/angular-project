@@ -2,10 +2,6 @@
   <app-content-layout class="border-bottom background-grey-3 flex flex-justify-center">
     <div class="login-wrapper background-white">
     <div class="header">
-      <button class="grey padding-right">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-
       <h2 class="header-title position-center">
         Login page
       </h2>
@@ -19,25 +15,23 @@
                formControlName="email">
         </div>
       </mat-form-field>
+      <mat-error *ngIf="loginForm.controls['email']?.errors?.required && loginForm.controls['email'].touched">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls['email']?.errors?.email && loginForm.controls['email'].touched">
+        Email is not valid
+      </mat-error>
 
       <mat-form-field class="no-padding-horizontal">
         <div class="flex">
           <input matInput placeholder="Password"
-                 type="email" formControlName="password">
-<!--          <i class="material-icons icon-small grey pointer margin-left" (click)="showPassword($event)">visibility</i>-->
+                 [type]="isPassword ? 'password' : 'text'" formControlName="password">
+          <i class="material-icons icon-small grey pointer margin-left" (click)="showPassword($event)">{{ isPassword ? 'visibility_off' : 'visibility' }}</i>
         </div>
       </mat-form-field>
-
-<!--      <mat-error *ngIf="loginForm.errors?.badLogging">-->
-<!--        {{ 'PAGES.LOGIN.LOGIN_FORM.ERROR' | translate }}-->
-<!--      </mat-error>-->
-
-<!--      <p class="login-form__forgot-password grey pointer">-->
-<!--        <span (click)="mailDialog(mailD)">-->
-<!--          {{ 'PAGES.LOGIN.ACTIONS.FORGOT' | translate }}-->
-<!--        </span>-->
-<!--      </p>-->
-
+      <mat-error *ngIf="loginForm.controls['password']?.errors?.required && loginForm.controls['password'].touched">
+        Passowrd is required
+      </mat-error>
       <button type="submit" class="login-form__submit-button round-button submit-btn">
         Log in
       </button>
