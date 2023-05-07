@@ -1,20 +1,19 @@
 import { Action, Actions, Selector, State, StateContext, Store } from '@ngxs/store';
 import {
+  GetMe,
   Login, SetAuthLoading,
-  // SetAuthLoading,
 } from '../actions/auth.actions';
 import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgZone, Injectable } from '@angular/core';
-// import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../services/user.service';
-import { LoginFormValues, LoginResponse } from '../../shared/types';
+import { LoginFormValues, LoginResponse, UserEntity } from '../../shared/types';
 import { Storage } from '../../shared/helpers';
 
 export class AuthStateModel {
   token?: string;
 
-  user?: string;
+  user?: UserEntity;
 
   loading: boolean;
 }
@@ -51,6 +50,19 @@ export class AuthState {
       tap((data: LoginResponse) => {
         patchState({ token: data.accessToken });
         Storage.setTokenToStorage(data.accessToken);
+      }, error => {
+        this.snackBar.open(error.error.message, '', {
+          duration: 3000,
+        });
+      }),
+    );
+  }
+
+  @Action(GetMe)
+  getMe({ patchState }: StateContext<AuthStateModel>) {
+    return this.userService.getMe().pipe(
+      tap((data: UserEntity) => {
+        patchState({ user: { ...data } });
       }, error => {
         this.snackBar.open(error.error.message, '', {
           duration: 3000,

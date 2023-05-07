@@ -1,8 +1,8 @@
 export const DYNAMIC_ID = ':id';
-export const AUTH = '/auth';
+export const AUTH = 'auth';
 export const ROUTES = {
-  ROOT: '/',
-  PROFILE: '/profile',
+  ROOT: '',
+  PROFILE: 'profile',
   AUTH: {
     LOGIN: `${AUTH}/login`,
     REGISTER: `${AUTH}/register`,
@@ -10,15 +10,15 @@ export const ROUTES = {
     RESET_PASSWORD: `${AUTH}/reset-password`,
   },
   USERS: {
-    ROOT: '/users',
+    ROOT: 'users',
   },
   BOTS: {
-    ROOT: '/bots',
+    ROOT: 'bots',
   },
   CLIENTS: {
-    ROOT: '/clients',
+    ROOT: 'clients',
   },
   CHAT: {
-    ROOT: '/chat',
+    ROOT: 'chat',
   },
 };

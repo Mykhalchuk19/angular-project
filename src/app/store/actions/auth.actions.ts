@@ -11,3 +11,7 @@ export class SetAuthLoading {
 
   constructor(public loading: boolean) { }
 }
+
+export class GetMe {
+  static readonly type = '[Auth] GetMe';
+}

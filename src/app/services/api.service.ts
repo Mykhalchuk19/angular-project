@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HeaderType } from '../shared/constants';
 
-
 type HeadersConf = {
   'Content-Type'?: string,
 };
@@ -35,10 +34,10 @@ export class ApiService {
     return new HttpHeaders(headersConf);
   }
 
-  get(path: string, headerType = HeaderType.JSON, params = {}): Observable<unknown> {
+  get<P>(path: string, headerType = HeaderType.JSON, params = {}): Observable<P> {
     const headers = this.setHeaders(headerType);
 
-    return this.http.get(this.apiUrl + path, { headers, params });
+    return this.http.get<P>(this.apiUrl + path, { headers, params });
   }
 
   patch(path: string, body: any = {}, headerType = HeaderType.JSON): Observable<unknown> {
@@ -47,10 +46,10 @@ export class ApiService {
     return this.http.patch(this.apiUrl + path, body, { headers });
   }
 
-  post<T>(path: string, body: T, headerType  = HeaderType.JSON): Observable<unknown> {
+  post<T, P>(path: string, body: T, headerType  = HeaderType.JSON): Observable<P> {
     const headers = this.setHeaders(headerType);
 
-    return this.http.post(this.apiUrl + path, body, { headers });
+    return this.http.post<P>(this.apiUrl + path, body, { headers });
   }
 
   put(path: string, body: any = {}, headerType  = HeaderType.JSON): Observable<unknown> {
