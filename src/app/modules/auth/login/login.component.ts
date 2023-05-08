@@ -3,10 +3,10 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthState } from '../../store/state/auth.state';
-import { Login, SetAuthLoading } from '../../store/actions/auth.actions';
-import { Form } from '../../shared/helpers';
-import { ROUTES } from '../../shared/constants/routes';
+import { AuthState } from '../../../store/state/auth.state';
+import { Login, SetAuthLoading } from '../../../store/actions/auth.actions';
+import { Form } from '../../../shared/helpers';
+import { ROUTES } from '../../../shared/constants/routes';
 
 @Component({
   selector: 'app-login',

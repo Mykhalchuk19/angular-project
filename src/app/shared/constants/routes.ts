@@ -4,9 +4,9 @@ export const ROUTES = {
   ROOT: '',
   PROFILE: 'profile',
   AUTH: {
-    LOGIN: `${AUTH}/login`,
+    LOGIN: 'login',
     REGISTER: `${AUTH}/register`,
-    FORGOT_PASSWORD: `${AUTH}/forgot-password`,
+    FORGOT_PASSWORD: 'forgot-password',
     RESET_PASSWORD: `${AUTH}/reset-password`,
   },
   USERS: {

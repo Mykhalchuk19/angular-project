@@ -7,7 +7,7 @@ import { LoginComponent } from './login.component';
 import { LoginRouting } from './login.routing';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../../shared';
+import { SharedModule } from '../../../shared';
 
 @NgModule({
   declarations: [

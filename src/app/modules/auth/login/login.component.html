@@ -1,0 +1,38 @@
+<div class="login-wrapper background-white">
+  <div class="header">
+    <h2 class="header-title position-center">
+      Login page
+    </h2>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form flex-center padding">
+
+    <mat-form-field class="no-padding-horizontal">
+      <div class="flex">
+        <input matInput type="email" placeholder="Email" formControlName="email">
+      </div>
+    </mat-form-field>
+    <mat-error *ngIf="loginForm.controls['email']?.errors?.required && loginForm.controls['email'].touched">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="loginForm.controls['email']?.errors?.email && loginForm.controls['email'].touched">
+      Email is not valid
+    </mat-error>
+
+    <mat-form-field class="no-padding-horizontal">
+      <div class="flex">
+        <input matInput placeholder="Password" [type]="isPassword ? 'password' : 'text'" formControlName="password">
+          <i class="material-icons icon-small grey pointer margin-left" (click)="showPassword($event)">{{ isPassword ? 'visibility_off' : 'visibility' }}</i>
+      </div>
+    </mat-form-field>
+    <mat-error *ngIf="loginForm.controls['password']?.errors?.required && loginForm.controls['password'].touched">
+      Password is required
+    </mat-error>
+    <button type="submit" class="login-form__submit-button round-button submit-btn">
+      Log in
+    </button>
+    <a routerLink="/auth/forgot-password">
+      Forgot password?
+    </a>
+  </form>
+</div>
+<app-loading [loading]="loading$ | async" [isGlobal]="true"></app-loading>
