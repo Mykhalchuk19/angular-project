@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Form } from '../../../shared/helpers';
 import { ForgotPassword, SetAuthLoading } from '../../../store/actions/auth.actions';
-import { ROUTES } from '../../../shared/constants/routes';
 
 @Component({
   selector: 'app-forgot-password',

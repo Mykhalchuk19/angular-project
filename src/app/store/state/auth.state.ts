@@ -1,16 +1,22 @@
 import { Action, Actions, Selector, State, StateContext, Store } from '@ngxs/store';
 import {
+  CheckToken,
   ForgotPassword,
   GetMe,
-  Login, SetAuthLoading,
+  Login, ResetPassword, SetAuthLoading,
 } from '../actions/auth.actions';
 import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgZone, Injectable } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { ForgotPasswordFormValues, LoginFormValues, LoginResponse, UserEntity } from '../../shared/types';
+import {
+  CheckTokenValues,
+  ForgotPasswordFormValues,
+  LoginFormValues,
+  LoginResponse, ResetPasswordFormValues,
+  UserEntity,
+} from '../../shared/types';
 import { Storage } from '../../shared/helpers';
-import { CommonResponse } from '../../shared/types/common';
 
 export class AuthStateModel {
   token?: string;
@@ -76,6 +82,30 @@ export class AuthState {
   @Action(ForgotPassword)
   forgotPassword(_: StateContext<AuthStateModel>, { payload }: { payload: ForgotPasswordFormValues }) {
     return this.userService.forgotPassword(payload).pipe(
+      tap(() => {
+      }, error => {
+        this.snackBar.open(error.error.message, '', {
+          duration: 3000,
+        });
+      }),
+    );
+  }
+
+  @Action(CheckToken)
+  checkToken(_: StateContext<AuthStateModel>, { payload }: { payload: CheckTokenValues }) {
+    return this.userService.checkToken(payload).pipe(
+      tap(() => {
+      }, error => {
+        this.snackBar.open(error.error.message, '', {
+          duration: 3000,
+        });
+      }),
+    );
+  }
+
+  @Action(ResetPassword)
+  resetPassword(_: StateContext<AuthStateModel>, { payload }: { payload: ResetPasswordFormValues }) {
+    return this.userService.resetPassword(payload).pipe(
       tap(() => {
       }, error => {
         this.snackBar.open(error.error.message, '', {

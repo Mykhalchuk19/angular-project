@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { API_ROUTES } from '../shared/constants/api.routes';
-import { ForgotPasswordFormValues, LoginFormValues, LoginResponse, UserEntity } from '../shared/types';
+import {
+  CheckTokenValues,
+  ForgotPasswordFormValues,
+  LoginFormValues,
+  LoginResponse,
+  ResetPasswordFormValues,
+  UserEntity
+} from '../shared/types';
 import { CommonResponse } from '../shared/types/common';
 
 @Injectable({
@@ -23,5 +30,13 @@ export class UserService {
 
   forgotPassword(data: ForgotPasswordFormValues): Observable<CommonResponse> {
     return this.apiService.post<ForgotPasswordFormValues, CommonResponse>(API_ROUTES.AUTH.FORGOT_PASSWORD, data);
+  }
+
+  checkToken(params: CheckTokenValues): Observable<CommonResponse> {
+    return this.apiService.get<CommonResponse>(API_ROUTES.AUTH.CHECK_TOKEN, params);
+  }
+
+  resetPassword(data: ResetPasswordFormValues): Observable<CommonResponse> {
+    return this.apiService.post<ResetPasswordFormValues, CommonResponse>(API_ROUTES.AUTH.RESET_PASSWORD, data);
   }
 }

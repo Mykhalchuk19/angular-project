@@ -1,4 +1,4 @@
-import { ForgotPasswordFormValues, LoginFormValues } from '../../shared/types';
+import {CheckTokenValues, ForgotPasswordFormValues, LoginFormValues, ResetPasswordFormValues} from '../../shared/types';
 
 export class Login {
   static readonly type = '[Auth] Login';
@@ -20,5 +20,19 @@ export class ForgotPassword {
   static readonly type = '[Auth] ForgotPassword';
 
   constructor(public payload: ForgotPasswordFormValues) {
+  }
+}
+
+export class CheckToken {
+  static readonly type = '[Auth] CheckToken';
+
+  constructor(public payload: CheckTokenValues) {
+  }
+}
+
+export class ResetPassword {
+  static readonly type = '[Auth] ResetPassword';
+
+  constructor(public payload: ResetPasswordFormValues) {
   }
 }
