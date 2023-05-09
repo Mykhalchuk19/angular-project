@@ -18,12 +18,7 @@
       Email is not valid
     </mat-error>
 
-    <mat-form-field class="no-padding-horizontal">
-      <div class="flex">
-        <input matInput placeholder="Password" [type]="isPassword ? 'password' : 'text'" formControlName="password">
-          <i class="material-icons icon-small grey pointer margin-left" (click)="showPassword($event)">{{ isPassword ? 'visibility_off' : 'visibility' }}</i>
-      </div>
-    </mat-form-field>
+    <app-password-input formControlName="password" placeholder="Password"></app-password-input>
     <mat-error *ngIf="loginForm.controls['password']?.errors?.required && loginForm.controls['password'].touched">
       Password is required
     </mat-error>

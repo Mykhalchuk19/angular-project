@@ -7,7 +7,7 @@ export const ROUTES = {
     LOGIN: 'login',
     REGISTER: `${AUTH}/register`,
     FORGOT_PASSWORD: 'forgot-password',
-    RESET_PASSWORD: `${AUTH}/reset-password`,
+    RESET_PASSWORD: 'reset-password',
   },
   USERS: {
     ROOT: 'users',

@@ -6,4 +6,8 @@ export type LoginFormValues = {
 
 export type LoginResponse = {
   accessToken: string;
-}
+};
+
+export type ForgotPasswordFormValues = {
+  email: string,
+};

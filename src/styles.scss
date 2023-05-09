@@ -925,6 +925,7 @@ i.material-icons:not(.icon-small) {
 .flex-center-column {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .flex-center-row {
@@ -2530,4 +2531,8 @@ input:-webkit-autofill:active { //removes autofill color on inputs
 .margin-center {
   margin-left: auto;
   margin-right: auto;
+}
+
+.width-300 {
+  width: 300px;
 }

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { API_ROUTES } from '../shared/constants/api.routes';
-import { LoginFormValues, LoginResponse, UserEntity } from '../shared/types';
+import { ForgotPasswordFormValues, LoginFormValues, LoginResponse, UserEntity } from '../shared/types';
+import { CommonResponse } from '../shared/types/common';
 
 @Injectable({
   providedIn: 'root',
@@ -20,4 +21,7 @@ export class UserService {
     return this.apiService.get(API_ROUTES.USERS.PROFILE);
   }
 
+  forgotPassword(data: ForgotPasswordFormValues): Observable<CommonResponse> {
+    return this.apiService.post<ForgotPasswordFormValues, CommonResponse>(API_ROUTES.AUTH.FORGOT_PASSWORD, data);
+  }
 }

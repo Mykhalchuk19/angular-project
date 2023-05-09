@@ -1,4 +1,4 @@
-import { LoginFormValues } from '../../shared/types';
+import { ForgotPasswordFormValues, LoginFormValues } from '../../shared/types';
 
 export class Login {
   static readonly type = '[Auth] Login';
@@ -14,4 +14,11 @@ export class SetAuthLoading {
 
 export class GetMe {
   static readonly type = '[Auth] GetMe';
+}
+
+export class ForgotPassword {
+  static readonly type = '[Auth] ForgotPassword';
+
+  constructor(public payload: ForgotPasswordFormValues) {
+  }
 }

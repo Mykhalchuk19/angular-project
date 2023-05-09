@@ -1,5 +1,6 @@
 import { Action, Actions, Selector, State, StateContext, Store } from '@ngxs/store';
 import {
+  ForgotPassword,
   GetMe,
   Login, SetAuthLoading,
 } from '../actions/auth.actions';
@@ -7,8 +8,9 @@ import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgZone, Injectable } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { LoginFormValues, LoginResponse, UserEntity } from '../../shared/types';
+import { ForgotPasswordFormValues, LoginFormValues, LoginResponse, UserEntity } from '../../shared/types';
 import { Storage } from '../../shared/helpers';
+import { CommonResponse } from '../../shared/types/common';
 
 export class AuthStateModel {
   token?: string;
@@ -70,6 +72,19 @@ export class AuthState {
       }),
     );
   }
+
+  @Action(ForgotPassword)
+  forgotPassword(_: StateContext<AuthStateModel>, { payload }: { payload: ForgotPasswordFormValues }) {
+    return this.userService.forgotPassword(payload).pipe(
+      tap(() => {
+      }, error => {
+        this.snackBar.open(error.error.message, '', {
+          duration: 3000,
+        });
+      }),
+    );
+  }
+
 
   // @Action( Register )
   // register( {patchState}: StateContext<AuthStateModel>, {payload} ) {
