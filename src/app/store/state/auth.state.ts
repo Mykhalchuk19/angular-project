@@ -1,5 +1,6 @@
 import { Action, Actions, Selector, State, StateContext, Store } from '@ngxs/store';
 import {
+  ChangePassword,
   CheckToken,
   ForgotPassword,
   GetMe,
@@ -10,10 +11,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgZone, Injectable } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import {
+  ChangePasswordFormValues,
   CheckTokenValues,
   ForgotPasswordFormValues,
   LoginFormValues,
-  LoginResponse, ResetPasswordFormValues,
+  LoginResponse, ResetPasswordValues,
   UserEntity,
 } from '../../shared/types';
 import { Storage } from '../../shared/helpers';
@@ -103,8 +105,20 @@ export class AuthState {
     );
   }
 
+  @Action(ChangePassword)
+  changePassword(_: StateContext<AuthStateModel>, { payload }: { payload: ChangePasswordFormValues }) {
+    return this.userService.changePassword(payload).pipe(
+      tap(() => {
+      }, error => {
+        this.snackBar.open(error.error.message, '', {
+          duration: 3000,
+        });
+      }),
+    );
+  }
+
   @Action(ResetPassword)
-  resetPassword(_: StateContext<AuthStateModel>, { payload }: { payload: ResetPasswordFormValues }) {
+  resetPassword(_: StateContext<AuthStateModel>, { payload }: { payload: ResetPasswordValues }) {
     return this.userService.resetPassword(payload).pipe(
       tap(() => {
       }, error => {

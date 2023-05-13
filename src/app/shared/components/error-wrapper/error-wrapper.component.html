@@ -1,0 +1,10 @@
+<div *ngIf="isError">
+  <div class="content-width flex-center">
+    <h3 class="header-title font-size-24">{{title}}</h3>
+    <p class="font-large item-text">{{description}}</p>
+    <img src="assets/illustration.png" alt="logo" class="logo-img">
+    <button *ngIf="back" type="button" class="round-button width-300" (click)="goBack()">
+      Back
+    </button>
+  </div>
+</div>

@@ -22,7 +22,14 @@ export type CheckTokenValues = {
   type: TokenType
 };
 
-export type ResetPasswordFormValues = {
+export type ChangePasswordFormValues = {
   password: string,
   repeatPassword: string,
-}
+};
+
+export type ResetPasswordValues = {
+  password: string,
+  token: string
+};
+
+export type ResetPasswordFormValues = Pick<ResetPasswordValues, 'password'>;

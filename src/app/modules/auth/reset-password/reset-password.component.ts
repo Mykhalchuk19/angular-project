@@ -3,9 +3,10 @@ import { Select, Store } from '@ngxs/store';
 import { AuthState } from '../../../store/state/auth.state';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Form } from '../../../shared/helpers';
-import { ResetPassword, SetAuthLoading } from '../../../store/actions/auth.actions';
+import { CheckToken, ResetPassword, SetAuthLoading } from '../../../store/actions/auth.actions';
+import { TokenType } from '../../../shared/types';
 
 @Component({
   selector: 'app-reset-password',
@@ -19,18 +20,30 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   isSentRequest = false;
 
+  token: string;
+
+  isError = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private store: Store,
     private router: Router,
+    private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
     this.resetPasswordForm = this.formBuilder.group({
       password: ['', Validators.required],
-      repeatPassword: ['', Validators.required],
+    });
+    this.route.queryParams.subscribe((params) => {
+      this.token = params.token;
+    });
+    this.store.dispatch(new CheckToken({ token: this.token, type: TokenType.RESET })).subscribe({
+      error:  () => {
+        this.isError = true;
+      },
     });
   }
 
@@ -43,7 +56,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
       Form.touchForm(this.resetPasswordForm);
     } else {
       this.store.dispatch(new SetAuthLoading(true));
-      this.store.dispatch(new ResetPassword(this.resetPasswordForm.value)).subscribe({
+      this.store.dispatch(new ResetPassword({ ...this.resetPasswordForm.value, token: this.token })).subscribe({
         next:  () => {
           this.store.dispatch(new SetAuthLoading(false));
         },

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ResetPasswordComponent } from './reset-password.component';
 import { ResetPasswordRouting } from './reset-password.routing';
+import { SharedModule } from '../../../shared';
 
 
 
@@ -10,7 +11,7 @@ import { ResetPasswordRouting } from './reset-password.routing';
     ResetPasswordComponent,
   ],
   imports: [
-    CommonModule, ResetPasswordRouting,
+    CommonModule, ResetPasswordRouting, SharedModule,
   ],
 })
 export class ResetPasswordModule { }

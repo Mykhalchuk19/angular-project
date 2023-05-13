@@ -3,12 +3,12 @@ import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { API_ROUTES } from '../shared/constants/api.routes';
 import {
+  ChangePasswordFormValues,
   CheckTokenValues,
   ForgotPasswordFormValues,
   LoginFormValues,
-  LoginResponse,
-  ResetPasswordFormValues,
-  UserEntity
+  LoginResponse, ResetPasswordValues,
+  UserEntity,
 } from '../shared/types';
 import { CommonResponse } from '../shared/types/common';
 
@@ -36,7 +36,11 @@ export class UserService {
     return this.apiService.get<CommonResponse>(API_ROUTES.AUTH.CHECK_TOKEN, params);
   }
 
-  resetPassword(data: ResetPasswordFormValues): Observable<CommonResponse> {
-    return this.apiService.post<ResetPasswordFormValues, CommonResponse>(API_ROUTES.AUTH.RESET_PASSWORD, data);
+  changePassword(data: ChangePasswordFormValues): Observable<CommonResponse> {
+    return this.apiService.post<ChangePasswordFormValues, CommonResponse>(API_ROUTES.AUTH.CHANGE_PASSWORD, data);
+  }
+
+  resetPassword(data: ResetPasswordValues): Observable<CommonResponse> {
+    return this.apiService.post<ResetPasswordValues, CommonResponse>(API_ROUTES.AUTH.RESET_PASSWORD, data);
   }
 }
