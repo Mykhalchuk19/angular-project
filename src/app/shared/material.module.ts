@@ -20,6 +20,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkTableModule } from '@angular/cdk/table';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
 
 const modules = [
   MatExpansionModule,
@@ -43,6 +45,8 @@ const modules = [
   MatGridListModule,
   MatProgressSpinnerModule,
   CdkTableModule,
+  MatSidenavModule,
+  MatDividerModule,
 ];
 
 @NgModule({

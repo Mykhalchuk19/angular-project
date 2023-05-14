@@ -18,7 +18,7 @@ import {
   LoginResponse, ResetPasswordValues,
   UserEntity,
 } from '../../shared/types';
-import { Storage } from '../../shared/helpers';
+import { getFileUrl, Storage } from '../../shared/helpers';
 
 export class AuthStateModel {
   token?: string;
@@ -43,6 +43,16 @@ export class AuthState {
   @Selector()
   static loading( state: AuthStateModel ) {
     return state.loading;
+  }
+
+  @Selector()
+  static getFullName( state: AuthStateModel ) {
+    return `${state.user?.name ?? ''}${' '}${state.user?.surname}`;
+  }
+
+  @Selector()
+  static getAvatarUrl( state: AuthStateModel ) {
+    return  state.user?.avatar ? getFileUrl(state.user.avatar.fileName) : undefined;
   }
 
   constructor(

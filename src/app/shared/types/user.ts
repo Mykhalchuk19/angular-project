@@ -5,6 +5,11 @@ export enum UserRoleEnum {
   MANAGER = 2,
 }
 
+type Avatar = {
+  id: string;
+  fileName: string;
+};
+
 export type UserEntity = {
   id: number,
   username: string,
@@ -16,6 +21,7 @@ export type UserEntity = {
   status: StatusEnum,
   createdAt: string,
   updatedAt: string,
+  avatar: Avatar | null;
 };
 
 export type UsersList = UserEntity[];

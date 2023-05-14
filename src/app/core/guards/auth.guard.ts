@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ROUTES } from '../../shared/constants/routes';
 import { Storage } from '../../shared/helpers';
 
 @Injectable({
@@ -20,7 +19,7 @@ export class AuthGuard implements CanActivate {
     if (token) {
       return true;
     } else {
-      this.router.navigate([ROUTES.AUTH.LOGIN]);
+      this.router.navigate(['/auth/login']);
       return false;
     }
   }

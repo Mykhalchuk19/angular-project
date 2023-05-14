@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { HomeRouting } from './home.routing';
+import { SharedModule } from '../../shared';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { HomeRouting } from './home.routing';
   ],
   imports: [
     HomeRouting,
+    SharedModule,
   ],
 })
 export class HomeModule { }
