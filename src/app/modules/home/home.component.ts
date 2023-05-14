@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { GetMe } from '../../store/actions/auth.actions';
+import { GetMe, LogOut } from '../../store/actions/auth.actions';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NavigationEnd, Router } from '@angular/router';
@@ -24,7 +24,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(
     private store: Store,
-    private observer: BreakpointObserver, private router: Router,
+    private observer: BreakpointObserver,
+    private router: Router,
   ) {
   }
 
@@ -57,5 +58,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.store.dispatch(new GetMe());
+  }
+
+  logOut() {
+    this.store.dispatch(new LogOut());
+    this.router.navigate(['/auth/login']);
   }
 }

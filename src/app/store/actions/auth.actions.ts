@@ -49,3 +49,7 @@ export class ResetPassword {
   constructor(public payload: ResetPasswordValues) {
   }
 }
+
+export class LogOut {
+  static readonly type = '[Auth] LogOut';
+}

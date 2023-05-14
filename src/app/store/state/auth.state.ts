@@ -4,7 +4,7 @@ import {
   CheckToken,
   ForgotPassword,
   GetMe,
-  Login, ResetPassword, SetAuthLoading,
+  Login, LogOut, ResetPassword, SetAuthLoading,
 } from '../actions/auth.actions';
 import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -137,6 +137,12 @@ export class AuthState {
         });
       }),
     );
+  }
+
+  @Action(LogOut)
+  logOut() {
+    this.store.reset({});
+    Storage.removeTokenFromStorage();
   }
 
 

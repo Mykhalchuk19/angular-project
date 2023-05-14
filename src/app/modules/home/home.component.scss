@@ -25,7 +25,9 @@ mat-sidenav {
   font-size: 1rem;
 
   mat-icon {
-    margin-right: 8px;
+    padding-right: 8px;
+    width: auto;
+    height: auto;
   }
 }
 

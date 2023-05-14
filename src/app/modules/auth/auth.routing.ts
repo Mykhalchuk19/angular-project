@@ -21,6 +21,7 @@ const routes: Routes = [
         path: ROUTES.AUTH.RESET_PASSWORD,
         loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordModule),
       },
+      { path: '', redirectTo: ROUTES.AUTH.LOGIN, pathMatch: 'full' },
     ],
   },
 ];
