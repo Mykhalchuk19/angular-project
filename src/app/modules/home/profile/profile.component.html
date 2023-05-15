@@ -1,0 +1,46 @@
+<div class="profile-wrapper">
+  <form [formGroup]="profileForm" class="flex-center padding">
+    <div class="flex">
+    <mat-form-field class="no-padding-horizontal margin-horizontal">
+      <div class="flex">
+        <input matInput type="email" placeholder="Email" formControlName="email">
+      </div>
+    </mat-form-field>
+    <mat-error *ngIf="profileForm.controls['email']?.errors?.required && profileForm.controls['email'].touched">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="profileForm.controls['email']?.errors?.email && profileForm.controls['email'].touched">
+      Email is not valid
+    </mat-error>
+    <mat-form-field class="no-padding-horizontal margin-horizontal">
+      <div class="flex">
+        <input matInput type="text" placeholder="First name" formControlName="name">
+      </div>
+    </mat-form-field>
+    <mat-error *ngIf="profileForm.controls['name']?.errors?.required && profileForm.controls['name'].touched">
+      First name is required
+    </mat-error>
+    </div>
+    <div class="flex">
+    <mat-form-field class="no-padding-horizontal margin-horizontal">
+      <div class="flex">
+        <input matInput type="text" placeholder="Last name" formControlName="surname">
+      </div>
+    </mat-form-field>
+    <mat-error *ngIf="profileForm.controls['surname']?.errors?.required && profileForm.controls['surname'].touched">
+      Last name is required
+    </mat-error>
+    <mat-form-field class="no-padding-horizontal margin-horizontal">
+      <div class="flex">
+        <input matInput type="text" placeholder="Phone" formControlName="phone">
+      </div>
+    </mat-form-field>
+    <mat-error *ngIf="profileForm.controls['phone']?.errors?.required && profileForm.controls['phone'].touched">
+      Phone is required
+    </mat-error>
+    </div>
+    <button type="submit" class="login-form__submit-button round-button submit-btn">
+      Save changes
+    </button>
+  </form>
+</div>

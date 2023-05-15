@@ -4,6 +4,7 @@ import {
   LoginFormValues,
   ChangePasswordFormValues,
   ResetPasswordValues,
+  ProfileFormValues,
 } from '../../shared/types';
 
 export class Login {
@@ -52,4 +53,11 @@ export class ResetPassword {
 
 export class LogOut {
   static readonly type = '[Auth] LogOut';
+}
+
+export class UpdateProfile {
+  static readonly type = '[Auth] UpdateProfile';
+
+  constructor(public payload: ProfileFormValues) {
+  }
 }

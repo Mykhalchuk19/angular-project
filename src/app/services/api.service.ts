@@ -52,10 +52,10 @@ export class ApiService {
     return this.http.post<P>(this.apiUrl + path, body, { headers });
   }
 
-  put(path: string, body: any = {}, headerType  = HeaderType.JSON): Observable<unknown> {
+  put<T, P>(path: string, body: T, headerType  = HeaderType.JSON): Observable<P> {
     const headers = this.setHeaders(headerType);
 
-    return this.http.put(this.apiUrl + path, body, { headers });
+    return this.http.put<P>(this.apiUrl + path, body, { headers });
   }
 
   delete(path: string, params: any = {}, headerType  = HeaderType.JSON): Observable<unknown> {

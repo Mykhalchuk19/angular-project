@@ -4,7 +4,7 @@ import {
   CheckToken,
   ForgotPassword,
   GetMe,
-  Login, LogOut, ResetPassword, SetAuthLoading,
+  Login, LogOut, ResetPassword, SetAuthLoading, UpdateProfile,
 } from '../actions/auth.actions';
 import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,7 +15,7 @@ import {
   CheckTokenValues,
   ForgotPasswordFormValues,
   LoginFormValues,
-  LoginResponse, ResetPasswordValues,
+  LoginResponse, ProfileFormValues, ProfileResponse, ResetPasswordValues,
   UserEntity,
 } from '../../shared/types';
 import { getFileUrl, Storage } from '../../shared/helpers';
@@ -23,7 +23,7 @@ import { getFileUrl, Storage } from '../../shared/helpers';
 export class AuthStateModel {
   token?: string;
 
-  user?: UserEntity;
+  user: UserEntity;
 
   loading: boolean;
 }
@@ -53,6 +53,11 @@ export class AuthState {
   @Selector()
   static getAvatarUrl( state: AuthStateModel ) {
     return  state.user?.avatar ? getFileUrl(state.user.avatar.fileName) : undefined;
+  }
+
+  @Selector()
+  static getCurrentUser( state: AuthStateModel ) {
+    return state.user;
   }
 
   constructor(
@@ -143,6 +148,28 @@ export class AuthState {
   logOut() {
     this.store.reset({});
     Storage.removeTokenFromStorage();
+  }
+
+  @Action(UpdateProfile)
+  updateProfile( { patchState, getState }: StateContext<AuthStateModel>, { payload }: { payload: ProfileFormValues } ) {
+    const state = getState();
+    return this.userService.updateProfile(payload).pipe(
+      tap({
+        next: (data: ProfileResponse) => {
+          patchState({ user: {
+            ...state.user,
+            name: data.name,
+            surname: data.surname,
+            phone: data.phone,
+            email: data.email,
+          } });
+        },
+        error: (error) => {
+          this.snackBar.open(error.error.message, '', {
+            duration: 3000,
+          });
+        },
+      }));
   }
 
 

@@ -7,7 +7,7 @@ import {
   CheckTokenValues,
   ForgotPasswordFormValues,
   LoginFormValues,
-  LoginResponse, ResetPasswordValues,
+  LoginResponse, ProfileFormValues, ProfileResponse, ResetPasswordValues,
   UserEntity,
 } from '../shared/types';
 import { CommonResponse } from '../shared/types/common';
@@ -42,5 +42,9 @@ export class UserService {
 
   resetPassword(data: ResetPasswordValues): Observable<CommonResponse> {
     return this.apiService.post<ResetPasswordValues, CommonResponse>(API_ROUTES.AUTH.RESET_PASSWORD, data);
+  }
+
+  updateProfile(data: ProfileFormValues): Observable<ProfileResponse> {
+    return this.apiService.put<ProfileFormValues, ProfileResponse>(API_ROUTES.USERS.PROFILE, data);
   }
 }
