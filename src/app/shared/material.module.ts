@@ -22,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const modules = [
   MatExpansionModule,
@@ -47,6 +48,7 @@ const modules = [
   CdkTableModule,
   MatSidenavModule,
   MatDividerModule,
+  MatToolbarModule,
 ];
 
 @NgModule({
