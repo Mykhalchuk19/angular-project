@@ -37,7 +37,7 @@ export class UserService {
   }
 
   changePassword(data: ChangePasswordFormValues): Observable<CommonResponse> {
-    return this.apiService.post<ChangePasswordFormValues, CommonResponse>(API_ROUTES.AUTH.CHANGE_PASSWORD, data);
+    return this.apiService.put<ChangePasswordFormValues, CommonResponse>(API_ROUTES.AUTH.CHANGE_PASSWORD, data);
   }
 
   resetPassword(data: ResetPasswordValues): Observable<CommonResponse> {

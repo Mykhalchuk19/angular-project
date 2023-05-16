@@ -123,11 +123,17 @@ export class AuthState {
   @Action(ChangePassword)
   changePassword(_: StateContext<AuthStateModel>, { payload }: { payload: ChangePasswordFormValues }) {
     return this.userService.changePassword(payload).pipe(
-      tap(() => {
-      }, error => {
-        this.snackBar.open(error.error.message, '', {
-          duration: 3000,
-        });
+      tap({
+        next: () => {
+          this.snackBar.open('Password was changed', '', {
+            duration: 3000,
+          });
+        },
+        error: error => {
+          this.snackBar.open(error.error.message, '', {
+            duration: 3000,
+          });
+        },
       }),
     );
   }
@@ -163,6 +169,9 @@ export class AuthState {
             phone: data.phone,
             email: data.email,
           } });
+          this.snackBar.open('Profile was updated', '', {
+            duration: 3000,
+          });
         },
         error: (error) => {
           this.snackBar.open(error.error.message, '', {
