@@ -3,11 +3,12 @@ import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { API_ROUTES } from '../shared/constants/api.routes';
 import {
+  Avatar,
   ChangePasswordFormValues,
   CheckTokenValues,
   ForgotPasswordFormValues,
   LoginFormValues,
-  LoginResponse, ProfileFormValues, ProfileResponse, ResetPasswordValues,
+  LoginResponse, ProfileFormValues, ProfileResponse, ResetPasswordValues, UpdateAvatarValues,
   UserEntity,
 } from '../shared/types';
 import { CommonResponse } from '../shared/types/common';
@@ -47,4 +48,13 @@ export class UserService {
   updateProfile(data: ProfileFormValues): Observable<ProfileResponse> {
     return this.apiService.put<ProfileFormValues, ProfileResponse>(API_ROUTES.USERS.PROFILE, data);
   }
+
+  changeAvatar(data: UpdateAvatarValues): Observable<Avatar> {
+    return this.apiService.put<UpdateAvatarValues, Avatar>(API_ROUTES.USERS.AVATAR, data);
+  }
+
+  removeAvatar(): Observable<CommonResponse> {
+    return this.apiService.delete<CommonResponse>(API_ROUTES.USERS.AVATAR);
+  }
+
 }

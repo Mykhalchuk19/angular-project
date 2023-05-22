@@ -5,7 +5,7 @@ export enum UserRoleEnum {
   MANAGER = 2,
 }
 
-type Avatar = {
+export type Avatar = {
   id: string;
   fileName: string;
 };
@@ -34,4 +34,8 @@ export type UpdateUserValues = {
   phone: string,
   status: StatusEnum,
   role: UserRoleEnum,
+};
+
+export type UpdateAvatarValues = {
+  fileId: string;
 };

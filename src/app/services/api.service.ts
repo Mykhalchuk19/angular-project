@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HeaderType } from '../shared/constants';
 
@@ -58,35 +58,37 @@ export class ApiService {
     return this.http.put<P>(this.apiUrl + path, body, { headers });
   }
 
-  delete(path: string, params: any = {}, headerType  = HeaderType.JSON): Observable<unknown> {
+  delete<P>(path: string, params = {}, headerType  = HeaderType.JSON): Observable<P> {
     const headers = this.setHeaders(headerType);
 
-    return this.http.delete(this.apiUrl + path, { headers, params });
+    return this.http.delete<P>(this.apiUrl + path, { headers, params });
   }
 
-  // upload(path, formData, method = 'put', headers?: HttpHeaders) {
-  //   if (!headers) {
-  //     headers = new HttpHeaders();
-  //     headers = headers.append('Content-Type', 'false');
-  //   }
-  //
-  //   return this.http[method](this.apiUrl + path, formData, {
-  //     reportProgress: true,
-  //     observe: 'events',
-  //     headers,
-  //   }).pipe(
-  //     map(event => event),
-  //     catchError(this.handleError),
-  //   );
-  // }
+  upload<P>(path: string, formData: FormData, method = 'post', headers?: HttpHeaders): Observable<P> {
+    if (!headers) {
+      headers = new HttpHeaders();
+      headers = headers.append('Content-Type', 'multipart/form-data');
+    }
 
-  // private handleError(error: HttpErrorResponse) {
-  //   if (error.error instanceof ErrorEvent) {
-  //     console.error('An error occurred:', error.error.message);
-  //   } else {
-  //     console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
-  //   }
-  //   return throwError(error.error.error || 'Something bad happened. Please try again later.');
-  // }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return this.http[method]<P>(this.apiUrl + path, formData, {
+      reportProgress: true,
+      observe: 'events',
+      headers,
+    }).pipe(
+      map(event => event),
+      catchError(this.handleError),
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+    }
+    return throwError(error.error.error || 'Something bad happened. Please try again later.');
+  }
 
 }
