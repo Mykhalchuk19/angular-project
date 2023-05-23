@@ -4,7 +4,7 @@ import {
   LoginFormValues,
   ChangePasswordFormValues,
   ResetPasswordValues,
-  ProfileFormValues,
+  ProfileFormValues, UpdateAvatarValues,
 } from '../../shared/types';
 
 export class Login {
@@ -60,4 +60,22 @@ export class UpdateProfile {
 
   constructor(public payload: ProfileFormValues) {
   }
+}
+
+export class UploadAvatar {
+  static readonly type = '[Auth] UploadAvatar';
+
+  constructor(public payload: File) {
+  }
+}
+
+export class ChangeAvatar {
+  static readonly type = '[Auth] ChangeAvatar';
+
+  constructor(public payload: UpdateAvatarValues) {
+  }
+}
+
+export class RemoveAvatar {
+  static readonly type = '[Auth] RemoveAvatar';
 }

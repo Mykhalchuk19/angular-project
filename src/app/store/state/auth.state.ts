@@ -1,24 +1,27 @@
 import { Action, Actions, Selector, State, StateContext, Store } from '@ngxs/store';
 import {
+  ChangeAvatar,
   ChangePassword,
   CheckToken,
   ForgotPassword,
   GetMe,
-  Login, LogOut, ResetPassword, SetAuthLoading, UpdateProfile,
+  Login, LogOut, RemoveAvatar, ResetPassword, SetAuthLoading, UpdateProfile, UploadAvatar,
 } from '../actions/auth.actions';
 import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgZone, Injectable } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import {
+  Avatar,
   ChangePasswordFormValues,
-  CheckTokenValues,
+  CheckTokenValues, FileData,
   ForgotPasswordFormValues,
   LoginFormValues,
-  LoginResponse, ProfileFormValues, ProfileResponse, ResetPasswordValues,
+  LoginResponse, ProfileFormValues, ProfileResponse, ResetPasswordValues, UpdateAvatarValues,
   UserEntity,
 } from '../../shared/types';
 import { getFileUrl, Storage } from '../../shared/helpers';
+import { FileService } from '../../services/file.service';
 
 export class AuthStateModel {
   token?: string;
@@ -62,6 +65,7 @@ export class AuthState {
 
   constructor(
     private userService: UserService,
+    private fileService: FileService,
     private snackBar: MatSnackBar,
     private zone: NgZone,
     private store: Store,
@@ -179,6 +183,67 @@ export class AuthState {
           });
         },
       }));
+  }
+
+  @Action(UploadAvatar)
+  uploadAvatar(_: StateContext<AuthStateModel>, { payload }: { payload: File } ) {
+
+    return this.fileService.uploadFile(payload).pipe( tap({
+      next: (data: FileData) => {
+        console.log(data);
+        this.store.dispatch(new ChangeAvatar({ fileId: data.id }));
+      },
+      error: (error) => {
+        this.snackBar.open(error.error.message, '', {
+          duration: 3000,
+        });
+      },
+    }));
+  }
+
+  @Action(ChangeAvatar)
+  changeAvatar( { patchState, getState }: StateContext<AuthStateModel>, { payload }: { payload: UpdateAvatarValues } ) {
+    const state = getState();
+    return this.userService.changeAvatar(payload).pipe(
+      tap({
+        next: (data: Avatar) => {
+          patchState({ user: {
+            ...state.user,
+            avatar: { ...data },
+          } });
+          this.snackBar.open('Avatar was uploaded', '', {
+            duration: 3000,
+          });
+        },
+        error: (error) => {
+          this.snackBar.open(error.error.message, '', {
+            duration: 3000,
+          });
+        },
+      }));
+  }
+
+  @Action(RemoveAvatar)
+  removeAvatar({ patchState, getState }: StateContext<AuthStateModel> ) {
+    const state = getState();
+    return this.userService.removeAvatar().pipe(
+      tap({
+        next: () => {
+          patchState({ user: {
+            ...state.user,
+            avatar: null,
+          } });
+          this.snackBar.open('Avatar was removed', '', {
+            duration: 3000,
+          });
+        },
+        error: (error) => {
+          this.snackBar.open(error.error.message, '', {
+            duration: 3000,
+          });
+        },
+      }));
+
   }
 
 

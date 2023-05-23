@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { LoadingModule, ContentLayoutComponent, PasswordInputComponent, ErrorWrapperComponent } from './components';
+import { LoadingModule, ContentLayoutComponent, PasswordInputComponent, ErrorWrapperComponent, AvatarComponent } from './components';
 
 
 const modulesToExport = [
@@ -27,6 +27,7 @@ const componentsToExport = [
   ContentLayoutComponent,
   PasswordInputComponent,
   ErrorWrapperComponent,
+  AvatarComponent,
 ];
 
 export const MY_NATIVE_FORMATS = {

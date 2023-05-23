@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HeaderType } from '../shared/constants';
 
@@ -73,22 +73,7 @@ export class ApiService {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return this.http[method]<P>(this.apiUrl + path, formData, {
-      reportProgress: true,
-      observe: 'events',
       headers,
-    }).pipe(
-      map(event => event),
-      catchError(this.handleError),
-    );
+    });
   }
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
-    }
-    return throwError(error.error.error || 'Something bad happened. Please try again later.');
-  }
-
 }

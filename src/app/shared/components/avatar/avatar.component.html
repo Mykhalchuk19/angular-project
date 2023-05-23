@@ -1,0 +1,14 @@
+<div class="flex-center-column">
+  <div class="avatar_wrapper">
+    <div class="avatar__overlay background-grey-5" (click)="hiddenPhotoInput.click()">
+      <p class="font-small avatar__text">Upload avatar</p>
+      <input type="file" class="hidden" [accept]="acceptedTypes" #hiddenPhotoInput
+           (change)="changeAvatar($event)" />
+      <img class="avatar__img"  *ngIf="avatarUrl$ | async"
+         src="{{avatarUrl$ | async}}" alt=" "/>
+    </div>
+  </div>
+  <button *ngIf="avatarUrl$ | async" type="button" class="round-button submit-btn avatar__btn" (click)="removeAvatar()">
+    Remove avatar
+  </button>
+</div>

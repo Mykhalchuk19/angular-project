@@ -12,8 +12,10 @@
 <mat-sidenav-container class="sidebar">
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
     <img
+      *ngIf="avatarUrl$ | async"
       class="avatar mat-elevation-z8"
       src="{{avatarUrl$ | async}}"
+      alt=" "
     />
 
     <h4 class="name">{{fullName$ | async}}</h4>
