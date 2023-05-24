@@ -1,4 +1,5 @@
 import { StatusEnum } from './common';
+import { ForgotPasswordFormValues } from './auth';
 
 export enum UserRoleEnum {
   ADMIN = 1,
@@ -25,6 +26,8 @@ export type UserEntity = {
 };
 
 export type UsersList = UserEntity[];
+
+export type InviteUserValues = ForgotPasswordFormValues;
 
 export type UpdateUserValues = {
   name: string,
