@@ -190,7 +190,6 @@ export class AuthState {
 
     return this.fileService.uploadFile(payload).pipe( tap({
       next: (data: FileData) => {
-        console.log(data);
         this.store.dispatch(new ChangeAvatar({ fileId: data.id }));
       },
       error: (error) => {
@@ -245,88 +244,6 @@ export class AuthState {
       }));
 
   }
-
-
-  // @Action( Register )
-  // register( {patchState}: StateContext<AuthStateModel>, {payload} ) {
-  //   if (payload.user) {
-  //     payload.user = {
-  //       ...payload.user,
-  //       email: payload.user.email && payload.user.email.toLowerCase()
-  //     };
-  //   } else {
-  //     payload = {
-  //       ...payload,
-  //       email: payload.email && payload.email.toLowerCase()
-  //     };
-  //   }
-  //   return this.userService.register( payload ).pipe( tap( ( data ) => {
-  //       // this.zone.run(() => {
-  //       //     this.router.navigate(['/']);
-  //       // })
-  //     },
-  //     error => {
-  //       if ( error.error.error === 'User with this email already exists in database' ) {
-  //         return;
-  //       }
-  //       this.snackBar.open( error.error.error, '', {
-  //         duration: 3000,
-  //       } );
-  //     }
-  //   ) );
-  // }
-
-  // @Action( ChangePassword )
-  // changePassword( {patchState}: StateContext<AuthStateModel>, {payload} ) {
-  //   return this.userService.changePassword( payload ).pipe( tap( ( data ) => {
-  //       this.zone.run( () => {
-  //         if ( data.type && data.type === 'forgot' ) {
-  //           this.router.navigate( ['/'] );
-  //         }
-  //         this.translateService.get('INFO_MESSAGES.PASSWORD_CHANGED').subscribe(message => {
-  //           this.snackBar.open(message);
-  //         });
-  //       } );
-  //     },
-  //     error => {
-  //       this.snackBar.open( error.error.error, '', {
-  //         duration: 3000,
-  //       } );
-  //     }
-  //   ) );
-  // }
-  //
-  // @Action( ChangeForgottenPassword )
-  // changeForgottenPassword( {patchState}: StateContext<AuthStateModel>, {payload} ) {
-  //   return this.userService.changeForgottenPassword( payload ).pipe( tap( ( data ) => {
-  //       this.zone.run( () => {
-  //         this.router.navigate( ['/feed'] );
-  //         this.translateService.get('INFO_MESSAGES.PASSWORD_CHANGED').subscribe(message => {
-  //           this.snackBar.open(message);
-  //         });
-  //       } );
-  //     },
-  //     error => {
-  //       this.snackBar.open( error.error.error, '', {
-  //         duration: 3000,
-  //       } );
-  //     }
-  //   ) );
-  // }
-
-  // @Action( Logout )
-  // logout( {setState, dispatch}: StateContext<AuthStateModel> ) {
-  //   setState( {} );
-  //
-  //   localStorage.removeItem(TOKEN_STORAGE_KEY);
-  //   localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
-  //
-  //   return dispatch(new ResetLoggedInUserStore()).pipe(
-  //     tap(() => {
-  //       this.router.navigate(['/']);
-  //     })
-  //   );
-  // }
 
   @Action( SetAuthLoading )
   setAuthLoading( { patchState }: StateContext<AuthStateModel>, { loading }: { loading: boolean }) {

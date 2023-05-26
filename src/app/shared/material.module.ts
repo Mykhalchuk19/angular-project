@@ -23,6 +23,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const modules = [
   MatExpansionModule,
@@ -49,6 +51,8 @@ const modules = [
   MatSidenavModule,
   MatDividerModule,
   MatToolbarModule,
+  MatTableModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({

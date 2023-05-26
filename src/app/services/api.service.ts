@@ -36,6 +36,7 @@ export class ApiService {
 
   get<P>(path: string, params = {}, headerType = HeaderType.JSON): Observable<P> {
     const headers = this.setHeaders(headerType);
+    console.log(params);
 
     return this.http.get<P>(this.apiUrl + path, { headers, params });
   }

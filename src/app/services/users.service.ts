@@ -15,7 +15,7 @@ import { API_ROUTES } from '../shared/constants/api.routes';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UsersService {
   constructor(
     private apiService: ApiService,
   ) {
