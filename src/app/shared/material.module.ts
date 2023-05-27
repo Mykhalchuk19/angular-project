@@ -25,6 +25,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 const modules = [
   MatExpansionModule,
@@ -53,6 +54,7 @@ const modules = [
   MatToolbarModule,
   MatTableModule,
   MatPaginatorModule,
+  MatSortModule,
 ];
 
 @NgModule({

@@ -7,3 +7,8 @@ export const DEFAULT_META = {
   totalItems: 0,
   totalPages: 0,
 };
+
+export const SORTING_ORDER = {
+  ASC: 'asc',
+  DESC: 'desc',
+};
