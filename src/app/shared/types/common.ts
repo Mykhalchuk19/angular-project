@@ -15,7 +15,7 @@ export type CommonResponse = {
 export type QueryParams = {
   search?: string,
   sort?: string,
-  limit: number,
+  limit?: number,
   page: number,
 };
 

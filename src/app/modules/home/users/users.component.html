@@ -38,4 +38,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<mat-paginator [length]="itemsCount" [pageSize]="3"  [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+<mat-paginator [length]="2" [pageSize]="10"  (page)="pageChanged($event)"></mat-paginator>
