@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users.component';
 import { UsersRouting } from './users.routing';
+import { SharedModule } from '../../../shared';
 
 
 
@@ -12,6 +13,7 @@ import { UsersRouting } from './users.routing';
   imports: [
     CommonModule,
     UsersRouting,
+    SharedModule,
   ],
 })
 export class UsersModule { }

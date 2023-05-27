@@ -1,5 +1,5 @@
 import { ListResponse, QueryParams, UsersList } from '../../shared/types';
-import { Action, Actions, State, StateContext, Store } from '@ngxs/store';
+import { Action, Actions, Selector, State, StateContext, Store } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from '../../services/users.service';
@@ -19,6 +19,13 @@ export class UsersStateModel {
 
 @Injectable()
 export class UsersState {
+
+
+  @Selector()
+  static usersList( state: UsersStateModel ) {
+    return state.list;
+  }
+
   constructor(
     private usersService: UsersService,
     private snackBar: MatSnackBar,
