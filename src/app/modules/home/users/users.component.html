@@ -1,3 +1,8 @@
+<div class="flex-end padding">
+  <button type="button" class="width-300 round-button" (click)="openInviteUserDialog(inviteUserDialog)">
+    Invite user
+  </button>
+</div>
 <table mat-table [dataSource]="dataSource"  matSort (matSortChange)="handleSort($event)">
 
   <ng-container matColumnDef="id">
@@ -39,3 +44,34 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator [length]="2" [pageSize]="10"  (page)="pageChanged($event)"></mat-paginator>
+
+<ng-template #inviteUserDialog>
+  <div class="dialog">
+    <div class="header">
+      <button class="item-start" matDialogClose><i class="material-icons">arrow_back</i></button>
+
+      <h2 class="header-title position-center">
+       Invite user
+      </h2>
+    </div>
+    <div class="restore-password-form flex-center padding">
+      <form [formGroup]="inviteUserForm" (ngSubmit)="handleInviteUser()">
+      <mat-form-field class="no-padding-horizontal">
+        <div class="flex">
+          <input matInput type="email" placeholder="Email" formControlName="email">
+        </div>
+      </mat-form-field>
+      <mat-error *ngIf="inviteUserForm.controls['email']?.errors?.required && inviteUserForm.controls['email'].touched">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="inviteUserForm.controls['email']?.errors?.email && inviteUserForm.controls['email'].touched">
+        Email is not valid
+      </mat-error>
+
+        <button type="submit" class="restore-password-form__submit-button round-button">
+          Invite
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>

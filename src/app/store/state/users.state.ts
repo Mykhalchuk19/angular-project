@@ -1,9 +1,9 @@
-import { ListResponse, QueryParams, UsersList } from '../../shared/types';
+import { InviteUserValues, ListResponse, QueryParams, UsersList } from '../../shared/types';
 import { Action, Actions, Selector, State, StateContext, Store } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from '../../services/users.service';
-import { FetchUsers, SetUsersLoading } from '../actions/users.actions';
+import { FetchUsers, InviteUser, SetUsersLoading } from '../actions/users.actions';
 import { tap } from 'rxjs';
 
 export class UsersStateModel {
@@ -50,6 +50,22 @@ export class UsersState {
         });
       },
       error: (error) => {
+        this.snackBar.open(error.error.message, '', {
+          duration: 3000,
+        });
+      },
+    }));
+  }
+
+  @Action(InviteUser)
+  inviteUser(_: StateContext<UsersStateModel>, { payload }: { payload: InviteUserValues }) {
+    return this.usersService.inviteUser(payload).pipe(tap({
+      next: () => {
+        this.snackBar.open('User was invited', '', {
+          duration: 3000,
+        });
+      },
+      error:  (error) => {
         this.snackBar.open(error.error.message, '', {
           duration: 3000,
         });
