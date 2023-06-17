@@ -7,6 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { delay, filter, Observable } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AuthState } from '../../store/state/auth.state';
+import { Storage } from '../../shared/helpers';
 
 @UntilDestroy()
 @Component({
@@ -57,7 +58,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new GetMe());
+    this.store.dispatch(new GetMe()).subscribe(({
+      error: () => {
+        Storage.removeTokenFromStorage();
+        this.router.navigate(['/auth/login']);
+      },
+    }));
   }
 
   logOut() {

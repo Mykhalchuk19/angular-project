@@ -22,6 +22,7 @@ import {
 } from '../../shared/types';
 import { getFileUrl, Storage } from '../../shared/helpers';
 import { FileService } from '../../services/file.service';
+import { Router } from '@angular/router';
 
 export class AuthStateModel {
   token?: string;
@@ -69,7 +70,6 @@ export class AuthState {
     private snackBar: MatSnackBar,
     private zone: NgZone,
     private store: Store,
-    private actions$: Actions,
   ) {
   }
 
@@ -90,12 +90,10 @@ export class AuthState {
   @Action(GetMe)
   getMe({ patchState }: StateContext<AuthStateModel>) {
     return this.userService.getMe().pipe(
-      tap((data: UserEntity) => {
-        patchState({ user: { ...data } });
-      }, error => {
-        this.snackBar.open(error.error.message, '', {
-          duration: 3000,
-        });
+      tap({
+        next: (data: UserEntity) => {
+          patchState({ user: { ...data } });
+        },
       }),
     );
   }
